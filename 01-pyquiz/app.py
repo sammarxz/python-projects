@@ -10,7 +10,7 @@ config = {
         "correct": "Boa, resposta correta!",
         "incorrect": "Opa, não foi dessa vez :(",
         "invalid": "\nOpção Inválida!\n",
-        "end": "FIm do Quiz",
+        "end": "Fim do Quiz",
         "points": "Você fez"
     },
     "points": 0
@@ -26,7 +26,7 @@ def print_welcome():
     print(config["messages"]["welcome"])
 
 def print_question(question, index):
-    print(f"\n#{question} ({index + 1}/{len(questions)}) Pts: {config['points']}", end="\n\n")
+    print(f"\n#{question} ({index + 1}/{len(questions)}) Pts: {config['points']}", end="\n")
 
 def print_options(options):
     for index, option in enumerate(options):
