@@ -1,7 +1,7 @@
 import time
 
 from messages import title, welcome_input
-from config import TIMER, MAX_SESSIONS
+from config import FOCUS_TIME, BREAK_TIME, REST_TIME, MAX_SESSIONS
 from clear import clear
 from notification import show_notification
 
@@ -10,15 +10,15 @@ def show_session(count):
     TIMER = [
         {
             "title": "Focus Time!",
-            "time": 2
+            "time": FOCUS_TIME
         },
         {
             "title": "Take a Break!",
-            "time": 2
+            "time": BREAK_TIME
         },
         {
             "title": "Rest Time!",
-            "time": 2
+            "time": REST_TIME
         },
     ]
     actual_session = TIMER[-1] if count == MAX_SESSIONS else TIMER[count % 2]
