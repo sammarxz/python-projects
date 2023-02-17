@@ -1,4 +1,5 @@
 import time
+import sys
 
 from messages import title, welcome_input
 from config import FOCUS_TIME, BREAK_TIME, REST_TIME, MAX_SESSIONS
@@ -45,14 +46,15 @@ def start():
         count+= 1
 
 if __name__ == "__main__":
-    while True:
-        clear()
-        print(title)
-        answer = input(welcome_input)
-        
-        if str.lower(answer) == "q":
-            break
-        else:
-            start()
-
-    print("Pomodoro Finished!")
+    try:
+        while True:
+            clear()
+            print(title)
+            answer = input(welcome_input)
+            
+            if str.lower(answer) == "q":
+                break
+            else:
+                start()
+    except KeyboardInterrupt:
+        sys.exit(0)

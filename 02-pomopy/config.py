@@ -1,13 +1,6 @@
-# Config time in minutes
-config = {
-    "focus": 25,
-    "break": 5,
-    "rest": 15
-}
-
 # convert to seconds
-FOCUS_TIME = config["focus"] * 60
-BREAK_TIME = config["break"] * 60
-REST_TIME = config["rest"] * 60
+FOCUS_TIME = 25 * 60 # 25 minutes
+BREAK_TIME = 5 * 60 # 5 minutos
+REST_TIME = 15 * 60 # 15 minutos
 
-MAX_SESSIONS = 7
+MAX_SESSIONS = 7 # Max number of pomodore sessions
