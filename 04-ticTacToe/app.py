@@ -38,10 +38,12 @@ class TicTacToe:
 
         if dict_win["X"]:
             self.done = "X"
-            print("X Venceu!")
+            print("X Venceu")
+            return "X"
         elif dict_win["O"]:
             self.done = "O"
-            print("O Venceu!")
+            print("O Venceu")
+            return "O"
 
         c = 0
         for i in range(3):
@@ -53,7 +55,7 @@ class TicTacToe:
         if c == 0:
             self.done = "D"
             print("Empate")
-            return
+            return "D"
 
     def get_player_move(self):
         invalid_move = True
@@ -78,17 +80,43 @@ class TicTacToe:
             invalid_move = False
         self.board[x][y] = "X"
 
-    def make_move(self):
-        list_moves = []
+    def bot_move(self):
+        possible_moves = []
 
         for i in range(3):
             for j in range(3):
                 if self.board[i][j] == " ":
-                    list_moves.append((i, j))
+                    possible_moves.append((i, j))
 
-        if len(list_moves) > 0:
-            x, y = random.choice(list_moves)
+        if len(possible_moves) > 0:
+            for move in possible_moves:
+                for letter in ["O", "X"]:
+                    x, y = move
+                    self.board[x][y] = letter
+                    if self.check_win_or_draw() == "O":
+                        self.board[x][y] = "O"
+                    else:
+                        self.board[x][y] = " "
+            x, y = random.choice(possible_moves)
             self.board[x][y] = "O"
+            # for i in possible_moves:
+            #     for letter in ["O", "X"]:
+            #         x, y = i
+            #         self.board[x][y] = letter
+            #         self.print_board()
+                # self.board[x][y] = "O"
+
+                # if self.check_win_or_draw(self.board) == "D":
+                #     self.board[x][y] = "O"
+
+
+        # if len(possible_moves) > 0:
+        #     x, y = random.choice(possible_moves)
+        #     score = self.minimax()
+        #     print(score)
+        #     if score > best_score:
+        #         best_score = score
+        #         self.board[x][y] = "O"
 
 game = TicTacToe()
 next = 0
@@ -98,10 +126,10 @@ while next == 0:
     game.print_board()
     while game.done == "":
         game.get_player_move()
-        game.make_move()
+        game.bot_move()
         os.system("clear")
         game.print_board()
-        game.check_win_or_draw()
+        # game.check_win_or_draw()
 
     print("Digite q para sair do jogo ou qualquer tecla para jogar novamente")
     next = input()
