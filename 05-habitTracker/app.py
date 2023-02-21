@@ -1,5 +1,4 @@
 import datetime
-import pandas as pd
 from tabulate import tabulate
 
 from habit import Habit
@@ -32,8 +31,7 @@ class HabitTracker:
         for habit in self.habits.values():
             habits.append(habit.get_habit(self.DATE_FORMAT))
 
-        df = pd.DataFrame(habits)
-        print(tabulate(df, headers="keys", tablefmt="psql"))
+        print(tabulate(habits, headers="keys", tablefmt="psql"))
 
 
 tracker = HabitTracker()
