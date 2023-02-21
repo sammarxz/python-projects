@@ -1,4 +1,6 @@
 import datetime
+import pandas as pd
+from tabulate import tabulate
 
 from habit import Habit
 
@@ -24,12 +26,14 @@ class HabitTracker:
         date = self.today if not date else datetime.datetime.strptime(date, self.DATE_FORMAT).date()
         habit = self.habits[name]
         habit.remove_completed_date(date)
-    
+
     def print_habits(self):
-        for name, habit in self.habits.items():
-            completed_dates = habit.get_completed_dates()
-            dates = [habit.strftime(self.DATE_FORMAT) for habit in completed_dates]
-            print("{} | {}".format(name, (', ').join(dates) if completed_dates else '-' ))
+        habits = []
+        for habit in self.habits.values():
+            habits.append(habit.get_habit(self.DATE_FORMAT))
+
+        df = pd.DataFrame(habits)
+        print(tabulate(df, headers="keys", tablefmt="psql"))
 
 
 tracker = HabitTracker()
@@ -40,7 +44,8 @@ tracker.add_habit("Sair com o cachorro")
 
 tracker.mark_habit_done("Leitura", "19/02/2023")
 tracker.mark_habit_done("Fazer exercícios")
-
 tracker.mark_habit_done("Sair com o cachorro", "19/02/2023")
+tracker.mark_habit_done("Sair com o cachorro", "19/02/2023")
+tracker.mark_habit_done("Leitura", "20/02/2023")
 
 tracker.print_habits()
